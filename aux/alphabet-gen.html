@@ -1,0 +1,52 @@
+<style type="text/css">
+    #box {
+        background: red;
+        width: 550px;
+        height: 550px;
+    }
+    #box div {
+        display: inline-block;
+        width: 70px;
+        height: 74px;
+        background: green;
+    }
+    #box div[data-selected='0'] {
+        background: blue;
+    }
+    #box div[data-selected='1'] {
+        background: yellow;
+    }
+
+</style>
+<div id='box'>
+<div onClick='toggle(this)' data-selected='0' id='c00'></div><div onClick='toggle(this)' data-selected='0' id='c01'></div><div onClick='toggle(this)' data-selected='0' id='c02'></div><div onClick='toggle(this)' data-selected='0' id='c03'></div><div onClick='toggle(this)' data-selected='0' id='c04'></div><div onClick='toggle(this)' data-selected='0' id='c05'></div><div onClick='toggle(this)' data-selected='0' id='c06'></div><div onClick='toggle(this)' data-selected='0' id='c10'></div><div onClick='toggle(this)' data-selected='0' id='c11'></div><div onClick='toggle(this)' data-selected='0' id='c12'></div><div onClick='toggle(this)' data-selected='0' id='c13'></div><div onClick='toggle(this)' data-selected='0' id='c14'></div><div onClick='toggle(this)' data-selected='0' id='c15'></div><div onClick='toggle(this)' data-selected='0' id='c16'></div> <div onClick='toggle(this)' data-selected='0' id='c20'></div><div onClick='toggle(this)' data-selected='0' id='c21'></div><div onClick='toggle(this)' data-selected='0' id='c22'></div><div onClick='toggle(this)' data-selected='0' id='c23'></div><div onClick='toggle(this)' data-selected='0' id='c24'></div><div onClick='toggle(this)' data-selected='0' id='c25'></div><div onClick='toggle(this)' data-selected='0' id='c26'></div> <div onClick='toggle(this)' data-selected='0' id='c30'></div><div onClick='toggle(this)' data-selected='0' id='c31'></div><div onClick='toggle(this)' data-selected='0' id='c32'></div><div onClick='toggle(this)' data-selected='0' id='c33'></div><div onClick='toggle(this)' data-selected='0' id='c34'></div><div onClick='toggle(this)' data-selected='0' id='c35'></div><div onClick='toggle(this)' data-selected='0' id='c36'></div> <div onClick='toggle(this)' data-selected='0' id='c40'></div><div onClick='toggle(this)' data-selected='0' id='c41'></div><div onClick='toggle(this)' data-selected='0' id='c42'></div><div onClick='toggle(this)' data-selected='0' id='c43'></div><div onClick='toggle(this)' data-selected='0' id='c44'></div><div onClick='toggle(this)' data-selected='0' id='c45'></div><div onClick='toggle(this)' data-selected='0' id='c46'></div> <div onClick='toggle(this)' data-selected='0' id='c50'></div><div onClick='toggle(this)' data-selected='0' id='c51'></div><div onClick='toggle(this)' data-selected='0' id='c52'></div><div onClick='toggle(this)' data-selected='0' id='c53'></div><div onClick='toggle(this)' data-selected='0' id='c54'></div><div onClick='toggle(this)' data-selected='0' id='c55'></div><div onClick='toggle(this)' data-selected='0' id='c56'></div> <div onClick='toggle(this)' data-selected='0' id='c60'></div><div onClick='toggle(this)' data-selected='0' id='c61'></div><div onClick='toggle(this)' data-selected='0' id='c62'></div><div onClick='toggle(this)' data-selected='0' id='c63'></div><div onClick='toggle(this)' data-selected='0' id='c64'></div><div onClick='toggle(this)' data-selected='0' id='c65'></div><div onClick='toggle(this)' data-selected='0' id='c66'></div>
+</div>
+<input id='name'>
+<button onclick="exportR()">Export</button>
+
+<script>
+    function toggle(e) {
+        var sel = e.dataset.selected;
+        e.dataset.selected = e.dataset.selected == '1' ? '0' : '1';
+        console.log(e.dataset.selected);
+        
+    }
+    function exportR() {
+        var name = document.getElementById('name').value;
+        
+        var pontos = "const CHAR_VIEW char_" + name +" = { '" + name +"', 7, 5, \n";
+        for(i=0;i<7;i++){
+            pontos += '\t';
+            for(j=0;j<5;j++){
+                var val = document.getElementById('c'+i+''+j).dataset.selected;
+                pontos += val + (!(j==4 && i==6) ? ',' : '');
+            }
+            pontos += '\n';
+        }
+        pontos += '};';
+        console.log(pontos);
+
+
+    }
+
+</script>

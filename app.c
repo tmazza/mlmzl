@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <curses.h>
+#include "alphabet.h"
 
 #define LED_PER_COL 7
 #define LED_PER_LIN 7
@@ -9,21 +10,56 @@
 int mountAddress(int x, int y);
 void delay(unsigned int mseconds);
 void printWindow(int jBegin);
+int** alocaMatrizInteiros(int lin, int col);
+void copyMatrix(CHAR_VIEW view, int x, int y);
 
 int lM = 7;
-int cM = 7;
-int M[7][7] = {0};
+int cM = 200;
+int **M;
+
+void writeMessage(char message[] ) {
+    int posj = 0;
+
+    for(int i=0;i<43;i++) {
+        switch(message[i]) {
+            case ' ': copyMatrix(char_ESPACE, 0, posj); posj+=5; break;
+            case 'A': copyMatrix(char_A, 0, posj); posj+=6; break;
+            case 'B': copyMatrix(char_B, 0, posj); posj+=6; break;
+            case 'C': copyMatrix(char_C, 0, posj); posj+=6; break;
+            case 'D': copyMatrix(char_D, 0, posj); posj+=6; break;
+            case 'E': copyMatrix(char_E, 0, posj); posj+=6; break;
+            case 'F': copyMatrix(char_F, 0, posj); posj+=6; break;
+            case 'G': copyMatrix(char_G, 0, posj); posj+=6; break;
+            case 'H': copyMatrix(char_H, 0, posj); posj+=6; break;
+            case 'I': copyMatrix(char_I, 0, posj); posj+=6; break;
+            case 'J': copyMatrix(char_J, 0, posj); posj+=6; break;
+            case 'K': copyMatrix(char_K, 0, posj); posj+=6; break;
+            case 'L': copyMatrix(char_L, 0, posj); posj+=6; break;
+            case 'M': copyMatrix(char_M, 0, posj); posj+=6; break;
+            case 'N': copyMatrix(char_N, 0, posj); posj+=6; break;
+            case 'O': copyMatrix(char_O, 0, posj); posj+=6; break;
+            case 'P': copyMatrix(char_P, 0, posj); posj+=6; break;
+            case 'Q': copyMatrix(char_Q, 0, posj); posj+=6; break;
+            case 'R': copyMatrix(char_R, 0, posj); posj+=6; break;
+            case 'S': copyMatrix(char_S, 0, posj); posj+=6; break;
+            case 'T': copyMatrix(char_T, 0, posj); posj+=6; break;
+            case 'U': copyMatrix(char_U, 0, posj); posj+=6; break;
+            case 'V': copyMatrix(char_V, 0, posj); posj+=6; break;
+            case 'W': copyMatrix(char_W, 0, posj); posj+=6; break;
+            case 'X': copyMatrix(char_X, 0, posj); posj+=6; break;
+            case 'Y': copyMatrix(char_Y, 0, posj); posj+=6; break;
+            case 'Z': copyMatrix(char_Z, 0, posj); posj+=6; break;
+        }
+    }
+    
+}
 
 int main() {
-    M[0][0] = 1;
-    M[1][1] = 1;
-    M[2][2] = 1;
-    M[3][3] = 1;
-    M[4][4] = 1;
-    M[5][5] = 1;
-    M[6][6] = 1;
+    M = alocaMatrizInteiros(lM, cM);
 
-    initscr(); // Init curses
+    writeMessage("  CHEGA POR HOJE   BOA NOITE");
+
+    initscr();
     start_color();
     init_pair(1, COLOR_BLACK, COLOR_RED);
     init_pair(2, COLOR_BLACK, COLOR_GREEN);
@@ -34,15 +70,15 @@ int main() {
 
         clear();
         refresh();
-        printWindow(c%7);
+        printWindow(c%cM);
         refresh();
 
-        delay(250);
+        delay(50);
 
         c++;
-    } while(c < 100);
+    } while(c);
 
-    endwin();           /* End curses mode        */        
+    endwin();
     
     return 0;
 }
@@ -93,3 +129,26 @@ void printWindow(int jBegin) {
     }
 
 }
+
+int** alocaMatrizInteiros(int lin, int col)
+{
+    int **m = (int**) malloc(lin * sizeof(int*));   
+    for (int i = 0; i < lin; i++) {
+        m[i] = (int*) malloc(col * sizeof(int));
+        for (int j = 0; j < col; j++) {
+            m[i][j] = 0;
+        }
+    }
+    return m;
+}
+
+/**
+ * Copia uma matrox mxn dentro de M a partir da posição x,y
+ */
+void copyMatrix(CHAR_VIEW view, int x, int y) {
+    for(int i = 0; i < view.nLines; i++) {
+        for(int j = 0; j < view.nColumns; j++) {
+            M[x+i][y+j] = view.data[i][j];
+        }
+    }
+}   
