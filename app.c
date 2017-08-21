@@ -57,12 +57,12 @@ void writeMessage(char message[] ) {
 int main() {
     M = alocaMatrizInteiros(lM, cM);
 
-    writeMessage("  CHEGA POR HOJE   BOA NOITE");
+    writeMessage("  GG IN THE HOUSE");
 
     initscr();
     start_color();
-    init_pair(1, COLOR_BLACK, COLOR_RED);
-    init_pair(2, COLOR_BLACK, COLOR_GREEN);
+    init_pair(1, COLOR_GREEN, COLOR_BLUE);
+    init_pair(2, COLOR_GREEN, COLOR_RED);
 
 
     int c = 0;
