@@ -68,10 +68,10 @@ void animateMessage() {
   if(c > 0 && pos == 0 || pos == LED_PER_COL) {
     windowPos++;
     escreveChar(msg[windowPos%(msgSize-1)], windowPos%2 ? 6 : 0);
-    if(windowPos>msgSize) windowPos = 1;
+    // if(windowPos>msgSize) windowPos = 1;
   }
   c++;
-  if(c>cM) c = 1;  
+  // if(c>cM) c = 1;  
 }
 
 
