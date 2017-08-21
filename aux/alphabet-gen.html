@@ -34,12 +34,12 @@
     function exportR() {
         var name = document.getElementById('name').value;
         
-        var pontos = "const CHAR_VIEW char_" + name +" = { '" + name +"', 7, 5, \n";
+        var pontos = "const CHAR_VIEW c_" + name +" = { 7, 5, \n";
         for(i=0;i<7;i++){
             pontos += '\t';
-            for(j=0;j<5;j++){
+            for(j=0;j<7;j++){
                 var val = document.getElementById('c'+i+''+j).dataset.selected;
-                pontos += val + (!(j==4 && i==6) ? ',' : '');
+                pontos += val + (!(j==4 && i==6) ? '\',\'' : '');
             }
             pontos += '\n';
         }
