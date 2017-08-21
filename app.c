@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include <curses.h>
+// #include <curses.h>
 #include "alphabet.h"
 
 #define LED_PER_COL 7
@@ -59,26 +59,26 @@ int main() {
 
     writeMessage("  GG IN THE HOUSE");
 
-    initscr();
-    start_color();
-    init_pair(1, COLOR_GREEN, COLOR_BLUE);
-    init_pair(2, COLOR_GREEN, COLOR_RED);
+    // initscr();
+    // start_color();
+    // init_pair(1, COLOR_GREEN, COLOR_BLUE);
+    // init_pair(2, COLOR_GREEN, COLOR_RED);
 
 
     int c = 0;
     do {
 
-        clear();
-        refresh();
-        printWindow(c%cM);
-        refresh();
+        // clear();
+        // refresh();
+            (c%cM);
+        // refresh();
 
-        delay(50);
+        // delay(50);
 
         c++;
     } while(c);
 
-    endwin();
+    // endwin();
     
     return 0;
 }
@@ -103,10 +103,10 @@ int mountAddress(int x, int y) {
 /** 
  * Hand made delay funtion (busy wating)
  */ 
-void delay(unsigned int mseconds) {
-    clock_t goal = mseconds*1000 + clock();
-    while (goal > clock());
-}
+// void delay(unsigned int mseconds) {
+//     clock_t goal = mseconds*1000 + clock();
+//     while (goal > clock());
+// }
 
 /**
  * Print LED_PER_LINxLED_PER_COL of M starting at column jBegin. 
@@ -122,10 +122,10 @@ void printWindow(int jBegin) {
             if(j >= LED_PER_COL) {
                 current_j = j - LED_PER_COL;
             }
-            attron(COLOR_PAIR(M[i][current_j] ? 1 : 2));
-            printw("%2s", " ", mountAddress(i, current_j));
+            // attron(COLOR_PAIR(M[i][current_j] ? 1 : 2));
+            printf("%d", mountAddress(i, current_j));
         }
-        printw("\n");
+        printf("\n");
     }
 
 }
