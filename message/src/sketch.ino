@@ -22,8 +22,8 @@ int posj = 0;
 int c = 0;
 char *message;
 
-int msgSize = 4;
-char msg[4] = "ABC";
+int msgSize = 0;
+char msg[] = "MESMO QUANDO QUERO FALAR SOBRE MIM NAO ACHO AS PALAVRAS CERTAS QUE ME CLASSIFIQUEM SOU UM POUCO DE TUDO O QUE HA DO QUE EU GOSTARIA DE SER SOU UMA OUTRA PESSOA ALGUEM QUE NAO SE EXISTE MAS QUE PARECE COM UM MONTE DE GENTE QUE COMO EU NAO SE ENCAIXA EM NADA";
 
 void setup()
 {
@@ -33,6 +33,8 @@ void setup()
   M = alocaMatrizChar(lM, cM);
   escreveChar(msg[0], 0);
   escreveChar(msg[1], 6);
+
+  msgSize = sizeof(msg);
 }
 
 int pos = 0;
@@ -46,14 +48,12 @@ void loop()
 void animateMessage() {
   pos = c % cM;
   printWindow(pos);
-  delay(75);
+  delay(50);
 
   if(c > 0 && pos == 0 || pos == LED_PER_COL) {
     windowPos++;
     escreveChar(msg[windowPos%(msgSize-1)], windowPos%2 ? 6 : 0);
-    if(windowPos>msgSize) {
-      windowPos = 1;
-    }
+    if(windowPos>msgSize) windowPos = 1;
   }
   c++;
   if(c>cM) c = 1;  
