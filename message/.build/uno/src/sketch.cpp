@@ -3,6 +3,7 @@
 #include "alphabet.h"
 void setup();
 void loop();
+void animateMessage();
 void ligaLED(int g, unsigned long fita);
 void apagaLED(int g);
 int mountAddress(int x, int y);
@@ -19,7 +20,7 @@ char** alocaMatrizChar(int lin, int col);
 #define E 0x008000 //VERDE
 #define L 0xFFA500 //LARANJA
 #define A 0xFFFF00 //AMARELO
-#define R 0x003300 //VERMELHO
+#define R 0x008800 //VERMELHO
 
 #define LED_PER_COL 7
 #define LED_PER_LIN 7
@@ -29,43 +30,50 @@ char** alocaMatrizChar(int lin, int col);
 Adafruit_NeoPixel leds = Adafruit_NeoPixel(LED_COUNT, PIN, NEO_GRB + NEO_KHZ800);
 
 int lM = 7;
-int cM = 50;
+int cM = 12;
 char **M;
 
 int posj = 0;
 int c = 0;
 char *message;
 
+int msgSize = 4;
+char msg[4] = "ABC";
+
 void setup()
 {
   Serial.begin(9600);//Inicia a serial com baud rate
   leds.begin(); // Inicia a fita de LED
   leds.show(); // Atualiza o estados dos LEDs  
-  
   M = alocaMatrizChar(lM, cM);
-
-  for(int i=0;i<lM;i++){
-    for(int j=0;j<cM;j++) {
-      Serial.print(M[i][j]);
-    }
-    Serial.println("");
-  }
-  char msg[8] = "EH ISSO";
-
-  for(int i=0;i<7;i++) {
-    escreveChar(msg[i], i*6);
-  }
-
+  escreveChar(msg[0], 0);
+  escreveChar(msg[1], 6);
 }
+
+int pos = 0;
+int windowPos = 1; //  Já imprimiu 0 e 1
 
 void loop()
 {
-  printWindow(c%cM);
-  c++;
-
-  if(c > cM) c = 0;
-  delay(100);
+  animateMessage();
 }
+
+void animateMessage() {
+  pos = c % cM;
+  printWindow(pos);
+  delay(50);
+
+  if(c > 0 && pos == 0 || pos == LED_PER_COL) {
+    windowPos++;
+    escreveChar(msg[windowPos%(msgSize-1)], windowPos%2 ? 6 : 0);
+    if(windowPos>msgSize) {
+      windowPos = 1;
+    }
+  }
+  c++;
+  if(c>cM) c = 1;  
+}
+
 
 //Função liga led individual
 void ligaLED(int g, unsigned long fita)//Recebe a posição e tempo de Delay
