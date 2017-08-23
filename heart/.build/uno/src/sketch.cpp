@@ -24,10 +24,6 @@ int lM = 7;
 int cM = 50;
 char **M;
 
-int posj = 0;
-int c = 0;
-char *message;
-
 void setup()
 {
   Serial.begin(9600);//Inicia a serial com baud rate
@@ -41,11 +37,9 @@ void loop()
   delay(1000);
   copyMatrix(c_OPEN, 0);
   printWindow(0);
-  delay(100);
+  delay(1000);
   copyMatrix(c_CLOSE, 0);
   printWindow(0);
-  delay(100);
-  // c++;
 }
 
 //Função liga led individual

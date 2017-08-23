@@ -1,0 +1,79 @@
+<head>
+    <script src='./jquery.js'></script>
+</head>
+
+<style type="text/css">
+    #box {
+        background: transparent;
+        width: 490px;
+        height: 520px;
+        border: 1px solid red;  
+    }
+    #box div {
+        display: inline-block;
+        width: 70px;
+        height: 74px;
+        background: green;
+        transition: all 2s;
+        /*border: 1px solid red; */
+    }
+    #box div[data-selected='0'] {
+        background: #ddd;
+    }
+    #box div[data-selected='1'] {
+        background: royalblue;
+    }
+
+</style>
+<div id='box'>
+<div  onmouseover="toggle2(this)" onClick='toggle(this)' data-selected='0' id='c00'></div><div  onmouseover="toggle2(this)" onClick='toggle(this)' data-selected='0' id='c01'></div><div  onmouseover="toggle2(this)" onClick='toggle(this)' data-selected='0' id='c02'></div><div  onmouseover="toggle2(this)" onClick='toggle(this)' data-selected='0' id='c03'></div><div  onmouseover="toggle2(this)" onClick='toggle(this)' data-selected='0' id='c04'></div><div  onmouseover="toggle2(this)" onClick='toggle(this)' data-selected='0' id='c05'></div><div  onmouseover="toggle2(this)" onClick='toggle(this)' data-selected='0' id='c06'></div><div  onmouseover="toggle2(this)" onClick='toggle(this)' data-selected='0' id='c10'></div><div  onmouseover="toggle2(this)" onClick='toggle(this)' data-selected='0' id='c11'></div><div  onmouseover="toggle2(this)" onClick='toggle(this)' data-selected='0' id='c12'></div><div  onmouseover="toggle2(this)" onClick='toggle(this)' data-selected='0' id='c13'></div><div  onmouseover="toggle2(this)" onClick='toggle(this)' data-selected='0' id='c14'></div><div  onmouseover="toggle2(this)" onClick='toggle(this)' data-selected='0' id='c15'></div><div  onmouseover="toggle2(this)" onClick='toggle(this)' data-selected='0' id='c16'></div> <div  onmouseover="toggle2(this)" onClick='toggle(this)' data-selected='0' id='c20'></div><div  onmouseover="toggle2(this)" onClick='toggle(this)' data-selected='0' id='c21'></div><div  onmouseover="toggle2(this)" onClick='toggle(this)' data-selected='0' id='c22'></div><div  onmouseover="toggle2(this)" onClick='toggle(this)' data-selected='0' id='c23'></div><div  onmouseover="toggle2(this)" onClick='toggle(this)' data-selected='0' id='c24'></div><div  onmouseover="toggle2(this)" onClick='toggle(this)' data-selected='0' id='c25'></div><div  onmouseover="toggle2(this)" onClick='toggle(this)' data-selected='0' id='c26'></div> <div  onmouseover="toggle2(this)" onClick='toggle(this)' data-selected='0' id='c30'></div><div  onmouseover="toggle2(this)" onClick='toggle(this)' data-selected='0' id='c31'></div><div  onmouseover="toggle2(this)" onClick='toggle(this)' data-selected='0' id='c32'></div><div  onmouseover="toggle2(this)" onClick='toggle(this)' data-selected='0' id='c33'></div><div  onmouseover="toggle2(this)" onClick='toggle(this)' data-selected='0' id='c34'></div><div  onmouseover="toggle2(this)" onClick='toggle(this)' data-selected='0' id='c35'></div><div  onmouseover="toggle2(this)" onClick='toggle(this)' data-selected='0' id='c36'></div> <div  onmouseover="toggle2(this)" onClick='toggle(this)' data-selected='0' id='c40'></div><div  onmouseover="toggle2(this)" onClick='toggle(this)' data-selected='0' id='c41'></div><div  onmouseover="toggle2(this)" onClick='toggle(this)' data-selected='0' id='c42'></div><div  onmouseover="toggle2(this)" onClick='toggle(this)' data-selected='0' id='c43'></div><div  onmouseover="toggle2(this)" onClick='toggle(this)' data-selected='0' id='c44'></div><div  onmouseover="toggle2(this)" onClick='toggle(this)' data-selected='0' id='c45'></div><div  onmouseover="toggle2(this)" onClick='toggle(this)' data-selected='0' id='c46'></div> <div  onmouseover="toggle2(this)" onClick='toggle(this)' data-selected='0' id='c50'></div><div  onmouseover="toggle2(this)" onClick='toggle(this)' data-selected='0' id='c51'></div><div  onmouseover="toggle2(this)" onClick='toggle(this)' data-selected='0' id='c52'></div><div  onmouseover="toggle2(this)" onClick='toggle(this)' data-selected='0' id='c53'></div><div  onmouseover="toggle2(this)" onClick='toggle(this)' data-selected='0' id='c54'></div><div  onmouseover="toggle2(this)" onClick='toggle(this)' data-selected='0' id='c55'></div><div  onmouseover="toggle2(this)" onClick='toggle(this)' data-selected='0' id='c56'></div> <div  onmouseover="toggle2(this)" onClick='toggle(this)' data-selected='0' id='c60'></div><div  onmouseover="toggle2(this)" onClick='toggle(this)' data-selected='0' id='c61'></div><div  onmouseover="toggle2(this)" onClick='toggle(this)' data-selected='0' id='c62'></div><div  onmouseover="toggle2(this)" onClick='toggle(this)' data-selected='0' id='c63'></div><div  onmouseover="toggle2(this)" onClick='toggle(this)' data-selected='0' id='c64'></div><div  onmouseover="toggle2(this)" onClick='toggle(this)' data-selected='0' id='c65'></div><div  onmouseover="toggle2(this)" onClick='toggle(this)' data-selected='0' id='c66'></div>
+</div>
+<input id='name'>
+<button onclick="exportR()">Export</button>
+
+<script>
+    function toggle2(e) {
+        // toggle(e);  
+    }
+    function toggle(e) {
+        var elem = e;
+        var sel = e.dataset.selected;
+        var id = e.id;
+        var lin = parseInt(id.substr(1,1));
+        var col = parseInt(id.substr(2,1));
+
+        console.log(lin, col)
+
+        if(e.dataset.selected == '1') {
+            data = {
+                cmd: 0,
+                x: lin,
+                y: col,
+                color: "0x00FF00",
+            }
+        } else {
+            data = {
+                cmd: 1,
+                x: lin,
+                y: col,
+                color: "0x00FF00",
+            }
+        }
+
+        elem.dataset.selected = elem.dataset.selected == '1' ? '0' : '1';
+
+        $.ajax({
+          method: "POST",
+          data: JSON.stringify(data)+"\n\n",
+          url: "http://192.168.2.177",
+        }).done(function( data ) {
+            console.log(elem.dataset.selected, 'asda')
+            console.log('data', data);
+          });
+    }
+
+    $(document).ready(function(){
+    });
+
+
+</script>
